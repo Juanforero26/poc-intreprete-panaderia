@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intérprete de Pedidos</title>
+    <link rel="stylesheet" href="style.css?v=11" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="assets/logo.png" alt="Logo Delimasa" class="logo" />
+        <div>
+          <h1>Intérprete de Pedidos</h1>
+          <div class="subtitle">POC · Panadería Inteligente</div>
+        </div>
+      </div>
+      <div class="version">v1.0</div>
+    </header>
+
+    <main class="wrap">
+      <section class="card">
+        <div class="header-top">
+          <div class="header-top-left">
+            <div class="switch-wrap" id="switchIA">
+              <input
+                id="usar_modelo"
+                class="toggle visually-hidden"
+                type="checkbox"
+                checked
+              />
+              <span class="switch" aria-hidden="true"></span>
+              <label for="usar_modelo" class="switch-label"
+                >Usar IA (Gemini)</label
+              >
+            </div>
+          </div>
+
+          <div class="header-top-right">
+            <label for="dropdownCanal" class="section-title-inline"
+              >Canal</label
+            >
+            <div class="dropdown" id="dropdownCanal">
+              <div
+                class="dropdown-selected canal-formulario_web"
+                id="selectedCanal"
+                data-value="formulario_web"
+              >
+                <span data-lucide="globe"></span>
+                <span>formulario_web</span>
+                <span class="arrow">▾</span>
+              </div>
+
+              <div class="dropdown-menu" id="menuCanal">
+                <div class="dropdown-item" data-value="formulario_web">
+                  <span data-lucide="globe"></span> formulario_web
+                </div>
+                <div class="dropdown-item" data-value="whatsapp">
+                  <span data-lucide="message-circle"></span> whatsapp
+                </div>
+                <div class="dropdown-item" data-value="email">
+                  <span data-lucide="mail"></span> email
+                </div>
+                <div class="dropdown-item" data-value="telefono">
+                  <span data-lucide="phone"></span> teléfono
+                </div>
+                <div class="dropdown-item" data-value="otro">
+                  <span data-lucide="more-horizontal"></span> otro
+                </div>
+              </div>
+            </div>
+
+            <button class="btn ghost" id="btnEjemplo">Usar ejemplo</button>
+          </div>
+        </div>
+
+        <label for="texto">Texto libre</label>
+        <textarea
+          id="texto"
+          placeholder="Escribe aquí el pedido del cliente..."
+        ></textarea>
+
+        <div id="charCount" class="muted">0 caracteres</div>
+
+        <div class="actions-bar">
+          <button class="btn ghost" id="btnLimpiar">Limpiar</button>
+          <button class="btn primary" id="btnEnviar">Interpretar</button>
+        </div>
+
+        <div id="status" class="status"></div>
+      </section>
+
+      <section class="card">
+        <div class="header-row">
+          <label>Vista limpia</label>
+          <button class="btn ghost small" id="btnClearClean">
+            Limpiar vista
+          </button>
+        </div>
+        <div id="vistaLimpia" class="muted">Sin datos aún.</div>
+      </section>
+
+      <section class="card">
+        <div class="header-row">
+          <label>JSON crudo</label>
+          <div class="row">
+            <button class="btn ghost small" id="btnCopy">Copiar JSON</button>
+            <button class="btn ghost small" id="btnClearRaw">
+              Limpiar JSON
+            </button>
+          </div>
+        </div>
+        <pre id="salida">{}</pre>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

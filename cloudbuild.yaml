@@ -1,0 +1,46 @@
+# Configuración para Cloud Build
+steps:
+  # Construir la imagen Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/interprete-panaderia', '.']
+  
+  # Subir la imagen a Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/interprete-panaderia']
+  
+  # Desplegar en Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'interprete-panaderia'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/interprete-panaderia'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'us-central1'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '1Gi'
+      - '--cpu'
+      - '1'
+      - '--max-instances'
+      - '10'
+      - '--min-instances'
+      - '0'
+      - '--port'
+      - '8080'
+      - '--set-env-vars'
+      - 'USE_VERTEX=true,VERTEX_REGION=us-central1,DEBUG_MODE=false,MODEL_NAME=gemini-2.0-flash'
+      - '--timeout'
+      - '300'
+
+# Opciones de build
+options:
+  machineType: 'E2_HIGHCPU_8'
+  diskSizeGb: 100
+
+# Timeout del build (10 minutos)
+timeout: '600s'

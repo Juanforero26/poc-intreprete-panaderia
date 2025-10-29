@@ -1,0 +1,30 @@
+# Crear entorno virtual
+python3 -m venv venv
+
+# Activar el entorno (según tu sistema operativo)
+# En macOS / Linux:
+source venv/bin/activate
+
+# En Windows:
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+ejecutar fastAPI
+
+uvicorn app.main:app --reload --port 8000
+
+
+Instrucciones de cloud
+
+El backend puede usar Vertex AI (modelo Gemini 1.5 Pro) si habilitas la variable de entorno 
+USE_VERTEX=true.
+Crea un service account key en Google Cloud Console:
+→ https://console.cloud.google.com/iam-admin/serviceaccounts
+Descarga el archivo JSON y configúralo como credencial predeterminada:
+export GOOGLE_APPLICATION_CREDENTIALS="/ruta/a/tu/clave.json"
+(Opcional) Especifica la región del modelo:
+export VERTEX_REGION="us-central1"
+
+Para futuros despliegues # Simplemente ejecuta el script de nuevo
+./deploy.sh poc-interprete-panaderia interprete-panaderia us-central1

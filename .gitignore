@@ -1,0 +1,29 @@
+# Entornos virtuales
+venv/
+.env/
+env/
+.venv/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de logs y bases de datos locales
+*.log
+*.sqlite3
+
+# Configuración de IDEs
+.vscode/
+.idea/
+*.swp
+
+# Archivos de dependencias temporales
+*.egg-info/
+.eggs/
+
+# Archivos de test
+.coverage
+.pytest_cache/
+app/__pycache__/main.cpython-312.pyc
+.env
